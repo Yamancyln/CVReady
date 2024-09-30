@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "BozukLink";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<h2 style="text-align:center">Bu sayfaya ulaşılamıyor, kullanıcı tanınmadı.</h2>
+<br />
+<h3 style="text-align:center">Tıkladığın bağlantı bozuk olabilir veya sayfa kaldırılmış olabilir. <a href="@Url.Action("Index", "Hakkimda", new { kullaniciAdi = Session["KullaniciAdi"] })">siteye geri dön.</a></h3>

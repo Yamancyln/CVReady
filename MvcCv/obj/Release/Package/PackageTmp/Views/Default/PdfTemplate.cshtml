@@ -1,0 +1,149 @@
+﻿@model MvcCv.Models.CompleteProfileViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>CV Ready</title>
+    <link rel="icon" type="image/x-icon" href="~/startbootstrap-resume-gh-pages/assets/img/cv.png" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="@Url.Content("~/startbootstrap-resume-gh-pages/css/styles.css")" rel="stylesheet" />
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    @foreach (var item in Model.Hakkimda)
+    {
+        <span class="d-block d-lg-none">@item.Ad @item.Soyad</span>
+        <span class="d-none d-lg-block">
+            <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="@(Request.Url.Scheme + "://" + Request.Url.Authority + Url.Content(@item.Resim))" alt="Fotoğraf" />
+        </span>
+    }
+    <!-- Page Content-->
+<div class="container-fluid p-0">
+    <!-- About-->    
+    <section class="resume-section" id="about">
+        <div class="resume-section-content">
+            @foreach (var x in Model.Hakkimda)
+            {
+                <h1 class="mb-0">
+                    @x.Ad
+                    <span class="text-primary">@x.Soyad</span>
+                </h1>
+                <div class="subheading mb-5">
+                    @x.Adres · @x.Telefon ·
+                    <a href="mailto:@x.Mail">@x.Mail</a>
+                </div>
+                <p class="lead mb-5">@x.Aciklama</p>
+            }
+        <div class="social-icons">
+            @foreach (var item in Model.SosyalMedya)
+            {
+                <i class="@item.tblsosyalmedya.Ikon"></i>@item.Link <&nbsp;>&nbsp;&nbsp;&nbsp;</&nbsp;>
+            }
+        </div>
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Education-->
+    <section class="resume-section" id="education">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Eğitimlerim</h2>
+            @foreach (var x in Model.Egitimler)
+            {
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0">@x.Baslik</h3>
+                        <div class="subheading mb-3">@x.AltBaslik1</div>
+                        <div>@x.AltBaslik2</div>
+                        <p>GNO: @x.GNO</p>
+                    </div>
+                    <div class="flex-shrink-0"><span class="text-primary">@x.Tarih</span></div>
+                </div>
+            }
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Experience-->
+    <section class="resume-section" id="experience">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Deneyimlerim</h2>
+            @foreach (var x in Model.Deneyimler)
+            {
+                <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-0">@x.Baslik</h3>
+                        <div class="subheading mb-3">@x.AltBaslik</div>
+                        <p>@x.Aciklama</p>
+                    </div>
+                    <div class="flex-shrink-0"><span class="text-primary">@x.Tarih</span></div>
+                </div>
+            }
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Skills-->
+    <section class="resume-section" id="skills">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Yeteneklerim</h2>            
+            <div class="subheading mb-3">Becerilerim</div>
+            <ul class="fa-ul mb-0">
+                @foreach (var x in Model.Yetenekler)
+                {
+                    <li style="display: flex; align-items: center;">
+                        <span class="fa-li" style="margin-right: 10px;"><i class="fas fa-check"></i></span>
+                        <span style="width: 320px; margin-right: 10px;">@x.Yetenek</span>
+                        <div class="progress progress-xs" style="width:150px; height:10px;">
+                            <div class="progress-bar bg-primary" style="width: @x.Oran%;"></div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Awards-->
+    <section class="resume-section" id="awards">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Ödüller & Sertifikalar</h2>
+            <ul class="fa-ul mb-0">
+                @foreach (var x in Model.Sertifikalar)
+                {
+                    <li>
+                        <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                        @x.Aciklama
+                    </li>
+                }
+            </ul>
+        </div>
+    </section>
+    <hr class="m-0" />
+    <!-- Interests-->
+    <section class="resume-section" id="interests">
+        <div class="resume-section-content">
+            <h2 class="mb-5">Hobilerim</h2>
+            @foreach (var x in Model.Hobiler)
+            {
+                <p>@x.Aciklama1</p>
+                <p class="mb-0">@x.Aciklama2</p>
+            }
+        </div>
+    </section>
+</div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="/startbootstrap-resume-gh-pages/js/scripts.js"></script>
+</body>
+</html>

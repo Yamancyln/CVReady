@@ -1,0 +1,679 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbcvModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbladmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="varchar" MaxLength="20" />
+          <Property Name="Sifre" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tbldeneyimlerim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="varchar" MaxLength="100" />
+          <Property Name="AltBaslik" Type="varchar" MaxLength="100" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="1000" />
+          <Property Name="Tarih" Type="varchar" MaxLength="100" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblegitimlerim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baslik" Type="varchar" MaxLength="100" />
+          <Property Name="AltBaslik1" Type="varchar" MaxLength="100" />
+          <Property Name="AltBaslik2" Type="varchar" MaxLength="100" />
+          <Property Name="GNO" Type="varchar" MaxLength="10" />
+          <Property Name="Tarih" Type="varchar" MaxLength="100" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblhakkimda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="30" />
+          <Property Name="Soyad" Type="varchar" MaxLength="30" />
+          <Property Name="Adres" Type="varchar" MaxLength="100" />
+          <Property Name="Telefon" Type="varchar" MaxLength="20" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="1000" />
+          <Property Name="Resim" Type="varchar" MaxLength="100" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblhobilerim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Aciklama1" Type="varchar" MaxLength="1000" />
+          <Property Name="Aciklama2" Type="varchar" MaxLength="1000" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbliletisim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="varchar" MaxLength="100" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Konu" Type="varchar" MaxLength="100" />
+          <Property Name="Mesaj" Type="varchar" MaxLength="1000" />
+          <Property Name="Tarih" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tblsertifikalarim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tarih" Type="varchar" MaxLength="30" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="250" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblsosyalmedya">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="30" />
+          <Property Name="Ikon" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="tblsosyalmedyahesap">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Link" Type="varchar" MaxLength="250" />
+          <Property Name="sosyalmedyaID" Type="int" Nullable="false" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblyeteneklerim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Yetenek" Type="varchar" MaxLength="100" />
+          <Property Name="Oran" Type="tinyint" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DENEYIM_kulID">
+          <End Role="tbladmin" Type="Self.tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbldeneyimlerim" Type="Self.tbldeneyimlerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbldeneyimlerim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EGITIM_kulID">
+          <End Role="tbladmin" Type="Self.tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblegitimlerim" Type="Self.tblegitimlerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblegitimlerim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HAKKIMDA">
+          <End Role="tbladmin" Type="Self.tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblhakkimda" Type="Self.tblhakkimda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblhakkimda">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HOBI_kulID">
+          <End Role="tbladmin" Type="Self.tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblhobilerim" Type="Self.tblhobilerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblhobilerim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERTIFIKA_kulID">
+          <End Role="tbladmin" Type="Self.tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblsertifikalarim" Type="Self.tblsertifikalarim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblsertifikalarim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOSYAL_kulID">
+          <End Role="tbladmin" Type="Self.tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblsosyalmedyahesap" Type="Self.tblsosyalmedyahesap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblsosyalmedyahesap">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOSYAL_sosyalID">
+          <End Role="tblsosyalmedya" Type="Self.tblsosyalmedya" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblsosyalmedyahesap" Type="Self.tblsosyalmedyahesap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblsosyalmedya">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblsosyalmedyahesap">
+              <PropertyRef Name="sosyalmedyaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_YETENEK_kulID">
+          <End Role="tbladmin" Type="Self.tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblyeteneklerim" Type="Self.tblyeteneklerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblyeteneklerim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbcvModelStoreContainer">
+          <EntitySet Name="tbladmin" EntityType="Self.tbladmin" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tbldeneyimlerim" EntityType="Self.tbldeneyimlerim" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tblegitimlerim" EntityType="Self.tblegitimlerim" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tblhakkimda" EntityType="Self.tblhakkimda" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tblhobilerim" EntityType="Self.tblhobilerim" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tbliletisim" EntityType="Self.tbliletisim" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tblsertifikalarim" EntityType="Self.tblsertifikalarim" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tblsosyalmedya" EntityType="Self.tblsosyalmedya" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tblsosyalmedyahesap" EntityType="Self.tblsosyalmedyahesap" Schema="dbcv" store:Type="Tables" />
+          <EntitySet Name="tblyeteneklerim" EntityType="Self.tblyeteneklerim" Schema="dbcv" store:Type="Tables" />
+          <AssociationSet Name="FK_DENEYIM_kulID" Association="Self.FK_DENEYIM_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tbldeneyimlerim" EntitySet="tbldeneyimlerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EGITIM_kulID" Association="Self.FK_EGITIM_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblegitimlerim" EntitySet="tblegitimlerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HAKKIMDA" Association="Self.FK_HAKKIMDA">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblhakkimda" EntitySet="tblhakkimda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOBI_kulID" Association="Self.FK_HOBI_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblhobilerim" EntitySet="tblhobilerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERTIFIKA_kulID" Association="Self.FK_SERTIFIKA_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblsertifikalarim" EntitySet="tblsertifikalarim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOSYAL_kulID" Association="Self.FK_SOSYAL_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblsosyalmedyahesap" EntitySet="tblsosyalmedyahesap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOSYAL_sosyalID" Association="Self.FK_SOSYAL_sosyalID">
+            <End Role="tblsosyalmedya" EntitySet="tblsosyalmedya" />
+            <End Role="tblsosyalmedyahesap" EntitySet="tblsosyalmedyahesap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_YETENEK_kulID" Association="Self.FK_YETENEK_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblyeteneklerim" EntitySet="tblyeteneklerim" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbcvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbladmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbldeneyimlerim" Relationship="dbcvModel.FK_DENEYIM_kulID" FromRole="tbladmin" ToRole="tbldeneyimlerim" />
+          <NavigationProperty Name="tblegitimlerim" Relationship="dbcvModel.FK_EGITIM_kulID" FromRole="tbladmin" ToRole="tblegitimlerim" />
+          <NavigationProperty Name="tblhakkimda" Relationship="dbcvModel.FK_HAKKIMDA" FromRole="tbladmin" ToRole="tblhakkimda" />
+          <NavigationProperty Name="tblhobilerim" Relationship="dbcvModel.FK_HOBI_kulID" FromRole="tbladmin" ToRole="tblhobilerim" />
+          <NavigationProperty Name="tblsertifikalarim" Relationship="dbcvModel.FK_SERTIFIKA_kulID" FromRole="tbladmin" ToRole="tblsertifikalarim" />
+          <NavigationProperty Name="tblyeteneklerim" Relationship="dbcvModel.FK_YETENEK_kulID" FromRole="tbladmin" ToRole="tblyeteneklerim" />
+          <NavigationProperty Name="tblsosyalmedyahesap" Relationship="dbcvModel.FK_SOSYAL_kulID1" FromRole="tbladmin" ToRole="tblsosyalmedyahesap" />
+        </EntityType>
+        <EntityType Name="tbldeneyimlerim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AltBaslik" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbladmin" Relationship="dbcvModel.FK_DENEYIM_kulID" FromRole="tbldeneyimlerim" ToRole="tbladmin" />
+        </EntityType>
+        <EntityType Name="tblegitimlerim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baslik" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AltBaslik1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AltBaslik2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GNO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbladmin" Relationship="dbcvModel.FK_EGITIM_kulID" FromRole="tblegitimlerim" ToRole="tbladmin" />
+        </EntityType>
+        <EntityType Name="tblhakkimda">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Resim" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbladmin" Relationship="dbcvModel.FK_HAKKIMDA" FromRole="tblhakkimda" ToRole="tbladmin" />
+        </EntityType>
+        <EntityType Name="tblhobilerim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aciklama1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Aciklama2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbladmin" Relationship="dbcvModel.FK_HOBI_kulID" FromRole="tblhobilerim" ToRole="tbladmin" />
+        </EntityType>
+        <EntityType Name="tbliletisim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdSoyad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Konu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Mesaj" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="tblsertifikalarim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aciklama" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbladmin" Relationship="dbcvModel.FK_SERTIFIKA_kulID" FromRole="tblsertifikalarim" ToRole="tbladmin" />
+        </EntityType>
+        <EntityType Name="tblyeteneklerim">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Yetenek" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Oran" Type="SByte" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbladmin" Relationship="dbcvModel.FK_YETENEK_kulID" FromRole="tblyeteneklerim" ToRole="tbladmin" />
+        </EntityType>
+        <EntityContainer Name="dbcvEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbladmin" EntityType="Self.tbladmin" />
+          <EntitySet Name="tbldeneyimlerim" EntityType="Self.tbldeneyimlerim" />
+          <EntitySet Name="tblegitimlerim" EntityType="Self.tblegitimlerim" />
+          <EntitySet Name="tblhakkimda" EntityType="Self.tblhakkimda" />
+          <EntitySet Name="tblhobilerim" EntityType="Self.tblhobilerim" />
+          <EntitySet Name="tbliletisim" EntityType="Self.tbliletisim" />
+          <EntitySet Name="tblsertifikalarim" EntityType="Self.tblsertifikalarim" />
+          <EntitySet Name="tblyeteneklerim" EntityType="Self.tblyeteneklerim" />
+          <AssociationSet Name="FK_DENEYIM_kulID" Association="dbcvModel.FK_DENEYIM_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tbldeneyimlerim" EntitySet="tbldeneyimlerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EGITIM_kulID" Association="dbcvModel.FK_EGITIM_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblegitimlerim" EntitySet="tblegitimlerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HAKKIMDA" Association="dbcvModel.FK_HAKKIMDA">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblhakkimda" EntitySet="tblhakkimda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOBI_kulID" Association="dbcvModel.FK_HOBI_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblhobilerim" EntitySet="tblhobilerim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERTIFIKA_kulID" Association="dbcvModel.FK_SERTIFIKA_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblsertifikalarim" EntitySet="tblsertifikalarim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_YETENEK_kulID" Association="dbcvModel.FK_YETENEK_kulID">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblyeteneklerim" EntitySet="tblyeteneklerim" />
+          </AssociationSet>
+          <EntitySet Name="tblsosyalmedyahesap" EntityType="dbcvModel.tblsosyalmedyahesap" />
+          <AssociationSet Name="FK_SOSYAL_kulID1" Association="dbcvModel.FK_SOSYAL_kulID1">
+            <End Role="tbladmin" EntitySet="tbladmin" />
+            <End Role="tblsosyalmedyahesap" EntitySet="tblsosyalmedyahesap" />
+          </AssociationSet>
+          <EntitySet Name="tblsosyalmedya" EntityType="dbcvModel.tblsosyalmedya" />
+          <AssociationSet Name="FK_SOSYAL_sosyalID" Association="dbcvModel.FK_SOSYAL_sosyalID">
+            <End Role="tblsosyalmedya" EntitySet="tblsosyalmedya" />
+            <End Role="tblsosyalmedyahesap" EntitySet="tblsosyalmedyahesap" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_DENEYIM_kulID">
+          <End Type="dbcvModel.tbladmin" Role="tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbcvModel.tbldeneyimlerim" Role="tbldeneyimlerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbldeneyimlerim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EGITIM_kulID">
+          <End Type="dbcvModel.tbladmin" Role="tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbcvModel.tblegitimlerim" Role="tblegitimlerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblegitimlerim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HAKKIMDA">
+          <End Type="dbcvModel.tbladmin" Role="tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbcvModel.tblhakkimda" Role="tblhakkimda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblhakkimda">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HOBI_kulID">
+          <End Type="dbcvModel.tbladmin" Role="tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbcvModel.tblhobilerim" Role="tblhobilerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblhobilerim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERTIFIKA_kulID">
+          <End Type="dbcvModel.tbladmin" Role="tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbcvModel.tblsertifikalarim" Role="tblsertifikalarim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblsertifikalarim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_YETENEK_kulID">
+          <End Type="dbcvModel.tbladmin" Role="tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbcvModel.tblyeteneklerim" Role="tblyeteneklerim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblyeteneklerim">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblsosyalmedyahesap">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sosyalmedyaID" Type="Int32" Nullable="false" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbladmin" Relationship="dbcvModel.FK_SOSYAL_kulID1" FromRole="tblsosyalmedyahesap" ToRole="tbladmin" />
+          <NavigationProperty Name="tblsosyalmedya" Relationship="dbcvModel.FK_SOSYAL_sosyalID" FromRole="tblsosyalmedyahesap" ToRole="tblsosyalmedya" />
+        </EntityType>
+        <Association Name="FK_SOSYAL_kulID1">
+          <End Type="dbcvModel.tbladmin" Role="tbladmin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbcvModel.tblsosyalmedyahesap" Role="tblsosyalmedyahesap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbladmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblsosyalmedyahesap">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblsosyalmedya">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Ikon" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblsosyalmedyahesap" Relationship="dbcvModel.FK_SOSYAL_sosyalID" FromRole="tblsosyalmedya" ToRole="tblsosyalmedyahesap" />
+        </EntityType>
+        <Association Name="FK_SOSYAL_sosyalID">
+          <End Type="dbcvModel.tblsosyalmedya" Role="tblsosyalmedya" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="dbcvModel.tblsosyalmedyahesap" Role="tblsosyalmedyahesap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblsosyalmedya">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblsosyalmedyahesap">
+              <PropertyRef Name="sosyalmedyaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbcvModelStoreContainer" CdmEntityContainer="dbcvEntities">
+          <EntitySetMapping Name="tbladmin">
+            <EntityTypeMapping TypeName="dbcvModel.tbladmin">
+              <MappingFragment StoreEntitySet="tbladmin">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbldeneyimlerim">
+            <EntityTypeMapping TypeName="dbcvModel.tbldeneyimlerim">
+              <MappingFragment StoreEntitySet="tbldeneyimlerim">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="AltBaslik" ColumnName="AltBaslik" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblegitimlerim">
+            <EntityTypeMapping TypeName="dbcvModel.tblegitimlerim">
+              <MappingFragment StoreEntitySet="tblegitimlerim">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Baslik" ColumnName="Baslik" />
+                <ScalarProperty Name="AltBaslik1" ColumnName="AltBaslik1" />
+                <ScalarProperty Name="AltBaslik2" ColumnName="AltBaslik2" />
+                <ScalarProperty Name="GNO" ColumnName="GNO" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblhakkimda">
+            <EntityTypeMapping TypeName="dbcvModel.tblhakkimda">
+              <MappingFragment StoreEntitySet="tblhakkimda">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblhobilerim">
+            <EntityTypeMapping TypeName="dbcvModel.tblhobilerim">
+              <MappingFragment StoreEntitySet="tblhobilerim">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Aciklama1" ColumnName="Aciklama1" />
+                <ScalarProperty Name="Aciklama2" ColumnName="Aciklama2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbliletisim">
+            <EntityTypeMapping TypeName="dbcvModel.tbliletisim">
+              <MappingFragment StoreEntitySet="tbliletisim">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Konu" ColumnName="Konu" />
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblsertifikalarim">
+            <EntityTypeMapping TypeName="dbcvModel.tblsertifikalarim">
+              <MappingFragment StoreEntitySet="tblsertifikalarim">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblyeteneklerim">
+            <EntityTypeMapping TypeName="dbcvModel.tblyeteneklerim">
+              <MappingFragment StoreEntitySet="tblyeteneklerim">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="Oran" ColumnName="Oran" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Yetenek" ColumnName="Yetenek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblsosyalmedyahesap">
+            <EntityTypeMapping TypeName="dbcvModel.tblsosyalmedyahesap">
+              <MappingFragment StoreEntitySet="tblsosyalmedyahesap">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="sosyalmedyaID" ColumnName="sosyalmedyaID" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblsosyalmedya">
+            <EntityTypeMapping TypeName="dbcvModel.tblsosyalmedya">
+              <MappingFragment StoreEntitySet="tblsosyalmedya">
+                <ScalarProperty Name="Ikon" ColumnName="Ikon" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

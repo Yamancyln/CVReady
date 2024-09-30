@@ -1,0 +1,43 @@
+﻿@model MvcCv.Models.Entity.tblsertifikalarim
+@{
+    ViewBag.Title = "SertifikaEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Sertifika Ekle</h4>
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                            <form method="post">
+                                @Html.Label("Açıklama")
+                                @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control", @placeholder = "Sertifika açıklamasını yazınız", @required = "required", @maxlength = "250" })
+                                @Html.ValidationMessageFor(x => x.Aciklama, "", new { @style = "color:red" })
+                                <br />
+                                @Html.Label("Tarih")
+                                @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", @placeholder = "Tarihini giriniz", @maxlength = "30" })
+                                <br />
+                                @Html.HiddenFor(x => x.kullaniciID)
+                                
+                                <div class="d-flex justify-content-end mt-3">
+                                    <button class="btn btn-success">Kaydet</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+    </section>
+</body>
+</html>

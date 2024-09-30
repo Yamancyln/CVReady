@@ -1,0 +1,56 @@
+﻿@using MvcCv.Models.Entity
+@model List<tbldeneyimlerim>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Deneyimler</h4>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-borderless">                                    
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Baslik</td>
+                                            <td>@item.AltBaslik</td>
+                                            <td>@item.Tarih</td>
+                                            <td>
+                                                <a class="btn btn-info btn-sm" href="@Url.Action("DeneyimGetir", "Deneyim", new { kullaniciAdi = Session["KullaniciAdi"], id = item.ID })">
+                                                    <i class="fas fa-pencil-alt">
+                                                    </i>
+                                                    Düzenle
+                                                </a>
+                                                <a class="btn btn-danger btn-sm" href="/Deneyim/DeneyimSil/@item.ID" onclick="confirmAction(event)">
+                                                    <i class="fas fa-trash">
+                                                    </i>
+                                                    Sil
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                            <a href="@Url.Action("DeneyimEkle", "Deneyim", new { kullaniciAdi = Session["KullaniciAdi"] })" class="btn btn-primary">Yeni Deneyim Ekle</a>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+</body>
+</html>

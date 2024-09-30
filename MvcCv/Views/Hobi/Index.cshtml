@@ -1,0 +1,48 @@
+﻿@using MvcCv.Models.Entity
+@model List<tblhobilerim>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{ string aciklama1 = "", aciklama2 = ""; }
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Hobiler</h4>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form method="post">
+                                    @foreach (var item in Model)
+                                    {
+                                        aciklama1 = item.Aciklama1;
+                                        aciklama2 = item.Aciklama2;
+                                    }
+                                    <label>Açıklama 1</label>
+                                    <textarea name="Aciklama1" class="form-control" placeholder="Hobilerinizi açılayınız..." rows="5" maxlength="1000">@aciklama1</textarea>
+                                    <br />
+                                    <label>Açıklama 2</label>
+                                    <textarea name="Aciklama2" class="form-control" placeholder="..." rows="5" maxlength="1000">@aciklama2</textarea>
+                                    <br />
+                                    <input type="hidden" name="kullaniciID" value="@Session["ID"]" />
+                                    <button class="btn btn-primary">Kaydet</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+</body>
+</html>

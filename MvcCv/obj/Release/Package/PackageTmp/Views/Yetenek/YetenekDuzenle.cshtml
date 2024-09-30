@@ -1,0 +1,50 @@
+﻿@model MvcCv.Models.Entity.tblyeteneklerim
+@{
+    ViewBag.Title = "YetenekDuzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Yetenek Güncelle</h4>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <h4>@Model.Yetenek</h4>
+                                <br />
+                                <form method="post">
+                                    @Html.HiddenFor(x => x.ID)
+
+                                    @Html.Label("Yetenek")
+                                    @Html.TextBoxFor(x => x.Yetenek, new { @class = "form-control", @placeholder = "Yetenek giriniz", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(x => x.Yetenek, "", new { @style = "color:red" })
+                                    <br />
+                                    @Html.Label("Derece")
+                                    @Html.TextBoxFor(x => x.Oran, new { @class = "form-control", @placeholder = "% oran cinsinden derecesini yazınız", @max = "100" })
+                                    <br />
+                                    @Html.HiddenFor(x => x.kullaniciID)
+
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <button class="btn btn-success">Güncelle</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+</body>
+</html>

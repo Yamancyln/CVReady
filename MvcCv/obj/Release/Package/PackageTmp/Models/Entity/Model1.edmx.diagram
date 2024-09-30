@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3544b299bc8c445497bc68fdf7557363" Name="Diagram1">
+        <EntityTypeShape EntityType="dbcvModel.tbladmin" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbcvModel.tbldeneyimlerim" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbcvModel.tblegitimlerim" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbcvModel.tblhakkimda" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbcvModel.tblhobilerim" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbcvModel.tbliletisim" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbcvModel.tblsertifikalarim" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbcvModel.tblyeteneklerim" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="dbcvModel.FK_DENEYIM_kulID" />
+        <AssociationConnector Association="dbcvModel.FK_EGITIM_kulID" />
+        <AssociationConnector Association="dbcvModel.FK_HAKKIMDA" />
+        <AssociationConnector Association="dbcvModel.FK_HOBI_kulID" />
+        <AssociationConnector Association="dbcvModel.FK_SERTIFIKA_kulID" />
+        <AssociationConnector Association="dbcvModel.FK_YETENEK_kulID" />
+        <EntityTypeShape EntityType="dbcvModel.tblsosyalmedyahesap" Width="1.5" PointX="9.625" PointY="3.875" />
+        <AssociationConnector Association="dbcvModel.FK_SOSYAL_kulID1" />
+        <EntityTypeShape EntityType="dbcvModel.tblsosyalmedya" Width="1.5" PointX="5.375" PointY="6.875" />
+        <AssociationConnector Association="dbcvModel.FK_SOSYAL_sosyalID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

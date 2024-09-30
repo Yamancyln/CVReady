@@ -1,0 +1,55 @@
+﻿@model MvcCv.Models.CompleteProfileViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Sosyal Medya Hesapları</h4>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-borderless">                                    
+                                    <tbody>
+                                        @foreach (var item in Model.SosyalMedyaListe)
+                                        {
+                                            <tr>
+                                                <td width="150px" align="right">@item.Ad &nbsp; <i class="@item.Ikon"></i></td>
+                                                <td width="150px" align="center">
+                                                    <a class="btn btn-close-white" href="@Url.Action("SosyalMedyaEkle", "SosyalMedya", new { kullaniciAdi = Session["KullaniciAdi"], sosyalId = item.ID })">
+                                                        <i class="fas fa-edit">
+                                                        </i>
+                                                    </a>                                                    
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-danger btn-sm" href="@Url.Action("SosyalMedyaSil", "SosyalMedya", new { sosyalId = item.ID })" onclick="confirmAction(event)">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Sil
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>        
+    </div>
+</body>
+</html>

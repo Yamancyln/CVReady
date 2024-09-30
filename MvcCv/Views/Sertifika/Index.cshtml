@@ -1,0 +1,73 @@
+﻿@using MvcCv.Models.Entity
+@model List<tblsertifikalarim>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{int i = 0; string renk = string.Empty;}
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Sertifikalar</h4>
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-pane" id="timeline">
+                                <!-- The timeline -->
+                                <div class="timeline timeline-inverse">
+                                    <!-- timeline time label -->
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+                                        if (i % 2 == 0)
+                                        {
+                                            renk = "bg-gradient-lightblue";
+                                        }
+                                        else
+                                        {
+                                            renk = "bg-success";
+                                        }
+                                        <div class="time-label">
+                                            <span class="@renk">
+                                                @item.Tarih
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <div class="timeline-item" style="border:none">
+                                                <div class="timeline-body" style="border:outset">
+                                                    @item.Aciklama
+                                                </div>
+                                                <div class="timeline-footer" style="background-color:white; border:none">
+                                                    <a class="btn btn-info btn-sm" href="@Url.Action("SertifikaGetir", "Sertifika", new { kullaniciAdi = Session["KullaniciAdi"], id = item.ID })">
+                                                        <i class="fas fa-pencil-alt">
+                                                        </i>
+                                                        Düzenle
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm" href="/Sertifika/SertifikaSil/@item.ID" onclick="confirmAction(event)">
+                                                        <i class="fas fa-trash">
+                                                        </i>
+                                                        Sil
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div><br />
+                                    }
+                                </div>
+                                <a href="@Url.Action("SertifikaEkle", "Sertifika", new { kullaniciAdi = Session["KullaniciAdi"] })" class="btn btn-primary">Yeni Sertifika Ekle</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+    </section>
+</body>
+</html>

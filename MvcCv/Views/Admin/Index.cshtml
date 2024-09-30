@@ -1,0 +1,56 @@
+﻿@model MvcCv.Models.Entity.tbladmin
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Ayarlar</h4>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Kullanıcı Adı</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <td>@Model.ID</td>
+                                        <td>@Model.KullaniciAdi</td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm" href="@Url.Action("AdminDuzenle", "Admin", new { kullaniciAdi = Session["KullaniciAdi"], id = Model.ID })">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Düzenle
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" href="/Admin/AdminKaldir/@Model.ID" onclick="confirmAction(event)">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Kaldır
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+</body>
+</html>

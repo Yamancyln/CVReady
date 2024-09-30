@@ -1,0 +1,56 @@
+﻿@model MvcCv.Models.Entity.tblegitimlerim
+@{
+    ViewBag.Title = "EgitimEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Eğitim Ekle</h4>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form method="post">
+                                    @Html.Label("Başlık")
+                                    @Html.TextBoxFor(x => x.Baslik, new { @class = "form-control", @placeholder = "Başlığı yazınız", @required = "required", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(x => x.Baslik, "", new { @style = "color:red" })
+                                    <br />
+                                    @Html.Label("Alt Başlık 1")
+                                    @Html.TextBoxFor(x => x.AltBaslik1, new { @class = "form-control", @placeholder = "1. alt Başlığı yazınız", @maxlength = "100" })
+                                    <br />
+                                    @Html.Label("Alt Başlık 2")
+                                    @Html.TextBoxFor(x => x.AltBaslik2, new { @class = "form-control", @placeholder = "2. alt Başlığı yazınız", @maxlength = "100" })
+                                    <br />
+                                    @Html.Label("GNO")
+                                    @Html.TextBoxFor(x => x.GNO, new { @class = "form-control", @placeholder = "Genel not ortalamasını yazınız", @maxlength = "10" })
+                                    @Html.ValidationMessageFor(x => x.GNO, "", new { @style = "color:red" })
+                                    <br />
+                                    @Html.Label("Tarih")
+                                    @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", @placeholder = "Tarih aralığını giriniz", @maxlength = "100" })
+                                    <br />
+                                    @Html.HiddenFor(x => x.kullaniciID) <!-- HiddenFor ile kullaniciID alınıyor -->
+
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <button class="btn btn-success">Kaydet</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿@using MvcCv.Models.Entity
+@model List<tblhakkimda>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{ string ad = "", soyad = "", telefon = "", mail = "", adres = "", resimText = "", aciklama = ""; }
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Hakkımda</h4>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form method="post">
+                                    @foreach (var item in Model)
+                                    {
+                                        ad = item.Ad;
+                                        soyad = item.Soyad;
+                                        telefon = item.Telefon;
+                                        mail = item.Mail;
+                                        adres = item.Adres;
+                                        resimText = item.Resim;
+                                        aciklama = item.Aciklama;
+                                    }
+                                    <label>Ad</label>
+                                    <input type="text" name="Ad" class="form-control" placeholder="Adınız" value="@ad" required="required" maxlength="30" />
+                                    <br />
+                                    <label>Soyad</label>
+                                    <input type="text" name="Soyad" class="form-control" placeholder="Soyadınız" value="@soyad" required="required" maxlength="30" />
+                                    <br />
+                                    <label>Telefon</label>
+                                    <input type="text" name="Telefon" class="form-control" placeholder="Telefon numaranız" value="@telefon" required="required" maxlength="20" />
+                                    <br />
+                                    <label>Mail</label>
+                                    <input type="text" name="Mail" class="form-control" placeholder="Mail adresiniz" value="@mail" required="required" maxlength="50" />
+                                    <br />
+                                    <label>Adres</label>
+                                    <textarea name="Adres" class="form-control" placeholder="Adresiniz" rows="2" required="required" maxlength="100">@adres</textarea>
+                                    <br />
+                                    <label>Resim</label>
+                                    <input type="text" name="Resim" class="form-control" placeholder="Görselinizin dosya yolu" value="@resimText" maxlength="100" />
+                                    <br />
+                                    <label>Açıklama</label>
+                                    <textarea name="Aciklama" class="form-control" placeholder="Açıklama..." rows="5" maxlength="1000">@aciklama</textarea>
+                                    <br />
+                                    <input type="hidden" name="kullaniciID" value="@Session["ID"]" />
+                                    <button class="btn btn-primary">Kaydet</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+</body>
+</html>

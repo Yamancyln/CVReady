@@ -1,0 +1,48 @@
+﻿@model MvcCv.Models.Entity.tblsertifikalarim
+@{
+    ViewBag.Title = "SertifikaGetir";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Sertifika Güncelle</h4>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <h4>@Model.Aciklama</h4>
+                                <br />
+                                <form method="post">
+                                    @Html.HiddenFor(x => x.ID)
+
+                                    @Html.Label("Açıklama")
+                                    @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control", @placeholder = "Sertifika açıklamasını yazınız", @required = "required", @maxlength = "250" })
+                                    @Html.ValidationMessageFor(x => x.Aciklama, "", new { @style = "color:red" })
+                                    <br />
+                                    @Html.Label("Tarih")
+                                    @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", @placeholder = "Tarihini giriniz", @maxlength = "30" })
+                                    <br />
+                                    @Html.HiddenFor(x => x.kullaniciID)
+                                    
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <button class="btn btn-success">Güncelle</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+</body>
+</html>

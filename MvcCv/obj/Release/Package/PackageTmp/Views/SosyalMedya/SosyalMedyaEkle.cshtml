@@ -1,0 +1,82 @@
+﻿@model MvcCv.Models.Entity.tblsosyalmedyahesap
+@{
+    ViewBag.Title = "SosyalMedyaEkle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{ string ad = null, ikon = null; }
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            @switch (Model.sosyalmedyaID)
+                            {
+                                case 1:
+                                    ad = "Linkedin";
+                                    ikon = "fab fa-linkedin-in";
+                                    break;
+                                case 2:
+                                    ad = "E-Posta";
+                                    ikon = "fas fa-envelope";
+                                    break;
+                                case 3:
+                                    ad = "WhatsApp";
+                                    ikon = "fab fa-whatsapp";
+                                    break;
+                                case 4:
+                                    ad = "GitHub";
+                                    ikon = "fab fa-github";
+                                    break;
+                                case 5:
+                                    ad = "Instagram";
+                                    ikon = "fab fa-instagram";
+                                    break;
+                                case 6:
+                                    ad = "Telegram";
+                                    ikon = "fab fa-telegram";
+                                    break;
+                                case 7:
+                                    ad = "Facebook";
+                                    ikon = "fab fa-facebook-f";
+                                    break;
+                                case 8:
+                                    ad = "X";
+                                    ikon = "fab fa-twitter";
+                                    break;
+                                default:
+                                    ad = "";
+                                    ikon = "";
+                                    break;
+                            }
+                            <div class="card-header">
+                                <h3 class="card-title">@ad</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <form method="post">
+                                    <i class="@ikon"></i>
+                                    <input type="text" name="Link" class="form-control" placeholder="@ad hesabının url adresini giriniz" value="@Model.Link" maxlength="250" />
+
+                                    <input type="hidden" name="sosyalmedyaID" value="@Model.sosyalmedyaID" />
+                                    <input type="hidden" name="kullaniciID" value="@Model.kullaniciID" />
+
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+</body>
+</html>
